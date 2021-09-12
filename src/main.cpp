@@ -1,13 +1,18 @@
 #include <Arduino.h>
 
-#include <rotary.hpp>
-#include <buffer.hpp>
-#include <timer.hpp>
-#include <button.hpp>
+#include "rotary.hpp"
+#include "button.hpp"
+#include "potentiometer.hpp"
+
+#include "timer.hpp"
+
+#include "buffer.hpp"
 
 aw109::rtu::RotaryEncoder<11, 12> rotary;
-aw109::rtu::Timer<10> timer;
 aw109::rtu::Button<2> button;
+aw109::rtu::Potentiometer<1> brightness;
+
+aw109::rtu::Timer<10> timer;
 
 aw109::rtu::Buffer<int, 0, 2> rotary_buffer(0, (int[]){-1, +1});
 aw109::rtu::Buffer<int, 0, 2> btn_sx1_buffer(0, (int[]){1, -1});
@@ -18,12 +23,14 @@ void setup()
 
   rotary.begin();
   button.begin();
+  brightness.begin();
 }
 
 void loop()
 {
   rotary.tick();
   button.tick();
+  brightness.tick();
 
   timer.tick(millis());
 
@@ -32,6 +39,8 @@ void loop()
 
   if (timer.is_expired())
   {
+    Serial.print(brightness.get());
+    Serial.print(",");
     Serial.print(rotary_buffer.get());
     Serial.print(",");
     Serial.println(btn_sx1_buffer.get());
