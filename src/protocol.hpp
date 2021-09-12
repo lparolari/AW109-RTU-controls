@@ -2,8 +2,8 @@
 
 namespace aw109::rtu::protocol
 {
-    String notify(int brightness, int inner_rotary, int outer_rotary, int btnsx1, int btnsx2, int btnsx3, int btnsx4,
-                  int btndx1, int btndx2, int btndx3)
+    String get_notify_message(int brightness, int inner_rotary, int outer_rotary, int btnsx1, int btnsx2, int btnsx3, int btnsx4,
+                              int btndx1, int btndx2, int btndx3)
     {
         String msg = "";
 
@@ -28,5 +28,10 @@ namespace aw109::rtu::protocol
         msg += String(btndx3);
 
         return msg;
+    }
+
+    void send(String msg)
+    {
+        Serial.println(msg);
     }
 } // namespace aw109::rtu::protocol
