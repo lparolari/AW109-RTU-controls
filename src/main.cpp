@@ -27,6 +27,7 @@ aw109::rtu::Button<8> btndx3;
 
 aw109::rtu::Timer<10> timer;
 
+aw109::rtu::RoundBuffer<int, 0, 5> brightness_buffer;
 aw109::rtu::Buffer<int, 0, 2> inner_rotary_buffer(0, (int[]){-1, +1});
 aw109::rtu::Buffer<int, 0, 2> outer_rotary_buffer(0, (int[]){-1, +1});
 aw109::rtu::Buffer<int, 0, 2> btnsx1_buffer(0, (int[]){1, -1});
@@ -56,7 +57,7 @@ void loop()
         timer.reset();
 
         String msg = aw109::rtu::protocol::get_notify_message(
-            brightness.get(),
+            brightness_buffer.get(),
             inner_rotary_buffer.get(),
             outer_rotary_buffer.get(),
             btnsx1_buffer.get(),
@@ -103,6 +104,7 @@ void tick_components()
 
 void update_component_buffers()
 {
+    brightness_buffer.set(brightness.get());
     inner_rotary_buffer.set(inner_rotary.get());
     outer_rotary_buffer.set(outer_rotary.get());
     btnsx1_buffer.set(btnsx1.get());
