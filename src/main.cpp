@@ -38,6 +38,8 @@ aw109::rtu::Buffer<int, 0, 2> btndx1_buffer(0, (int[]){1, -1});
 aw109::rtu::Buffer<int, 0, 2> btndx2_buffer(0, (int[]){1, -1});
 aw109::rtu::Buffer<int, 0, 2> btndx3_buffer(0, (int[]){1, -1});
 
+String last_msg = "";
+
 void setup()
 {
     Serial.begin(9600);
@@ -68,7 +70,10 @@ void loop()
             btndx2_buffer.get(),
             btndx3_buffer.get());
 
-        aw109::rtu::protocol::send(msg);
+        if (msg != last_msg)
+            aw109::rtu::protocol::send(msg);
+
+        last_msg = msg;
 
         reset_component_buffers();
     }
