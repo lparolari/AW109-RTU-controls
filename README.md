@@ -36,7 +36,7 @@ We need to implement controls in red boxes.
 ```
 start: message
 
-message : brightness "," inner_rotary "," outer_rotary "," btnsx1 "," btnsx2 "," btnsx3 "," btnsx4 "," btndx1 "," btndx2 "," btndx3
+message : brightness "," inner_rotary "," outer_rotary "," btnsx1 "," btnsx2 "," btnsx3 "," btnsx4 "," btndx1 "," btndx2 "," btndx3 "," a0 "," a2 "," a3 "," a4 "," a5 "," a6 "," a7
 
 brightness: "0" | INT
 
@@ -53,6 +53,14 @@ btndx3: button_event
 
 rotary_event: "-1" | "0" | "1"
 button_event: "-1" | "0" | "1"
+
+a0: INT
+a2: INT
+a3: INT
+a4: INT
+a5: INT
+a6: INT
+a7: INT
 
 %import common.INT
 ```
