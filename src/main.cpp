@@ -25,7 +25,7 @@ aw109::rtu::Button<6> btndx1;
 aw109::rtu::Button<7> btndx2;
 aw109::rtu::Button<8> btndx3;
 
-aw109::rtu::Timer<10> timer;
+aw109::rtu::Timer<50> timer;
 
 aw109::rtu::RoundBuffer<int, 0, 5> brightness_buffer;
 aw109::rtu::Buffer<int, 0, 2> inner_rotary_buffer(0, (int[]){-1, +1});
